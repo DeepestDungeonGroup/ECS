@@ -1,5 +1,6 @@
+#!/bin/bash
 clear
-if [[ $1 == "re" ]]
+if [[ $1 == "-re" ]]
 then
     echo "------------RE-BUILD"------------
     rm -rf ./build/ ./*.a
@@ -9,7 +10,23 @@ then
     cd ..
     echo "------------END------------"
 
-elif [[ $1 == "d" ]]
+elif [[ $1 == "-t" ]]
+then
+    echo ""------------DEBUG"------------"
+    rm -rf ./build/ ./*.a
+    mkdir ./build/ && cd ./build/
+    cmake .. -G "Unix Makefiles" -DENABLE_TESTS=ON -DENABLE_COVERAGE=ON
+    cmake --build .
+    ctest --output-on-failure
+    gcovr --root .. \
+        --filter '../src/.*' \
+        --filter '../include/.*' \
+        --html --html-details -o coverage.html
+    xdg-open coverage.html
+    cd ..
+    echo "------------END------------"
+
+elif [[ $1 == "-d" ]]
 then
     echo ""------------DEBUG"------------"
     rm -rf ./build/ ./*.a
@@ -19,7 +36,7 @@ then
     cd ..
     echo "------------END------------"
 
-elif [[ $1 == "c" ]]
+elif [[ $1 == "-c" ]]
 then
     echo "------------CLEAR------------"
     rm -rf ./build/ ./*.a
