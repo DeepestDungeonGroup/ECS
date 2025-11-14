@@ -51,17 +51,29 @@ class Registry {
 
         template <typename Component>
         void addComponent(const Entity& e, const Component& c) {
-            std::any_cast<SparseArray<Component>&>(_component_array.at(std::type_index(typeid(Component)))).insert_at(e, c);
+            try {
+                std::any_cast<SparseArray<Component>&>(_component_array.at(std::type_index(typeid(Component)))).insert_at(e, c);
+            } catch (const std::bad_any_cast& e) {
+                std::cout << e.what() << std::endl;
+            }
         }
 
         template <typename Component>
         void addComponent(const Entity& e, Component&& c) {
-            std::any_cast<SparseArray<Component>&>(_component_array.at(std::type_index(typeid(Component)))).insert_at(e, std::forward<Component>(c));
+            try {
+                std::any_cast<SparseArray<Component>&>(_component_array.at(std::type_index(typeid(Component)))).insert_at(e, std::forward<Component>(c));
+            } catch (const std::bad_any_cast& e) {
+                std::cout << e.what() << std::endl;
+            }
         }
 
         template <typename Component>
         void removeComponent(const Entity& e) {
-            std::any_cast<SparseArray<Component>&>(_component_array.at(std::type_index(typeid(Component)))).erase(e);
+            try {
+                std::any_cast<SparseArray<Component>&>(_component_array.at(std::type_index(typeid(Component)))).erase(e);
+            } catch (const std::bad_any_cast& e) {
+                std::cout << e.what() << std::endl;
+            }
         }
 
     private:
