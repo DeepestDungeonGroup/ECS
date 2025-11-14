@@ -5,7 +5,7 @@ then
     echo "------------RE-BUILD"------------
     rm -rf ./build/ ./*.a
     mkdir ./build/ && cd ./build/
-    cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+    cmake ..
     cmake --build .
     cd ..
     echo "------------END------------"
@@ -15,7 +15,7 @@ then
     echo ""------------DEBUG"------------"
     rm -rf ./build/ ./*.a
     mkdir ./build/ && cd ./build/
-    cmake .. -G "Unix Makefiles" -DENABLE_TESTS=ON -DENABLE_COVERAGE=ON
+    cmake .. -DENABLE_TESTS=ON -DENABLE_COVERAGE=ON
     cmake --build .
     ctest --output-on-failure
     gcovr --root .. \
@@ -31,7 +31,7 @@ then
     echo ""------------DEBUG"------------"
     rm -rf ./build/ ./*.a
     mkdir ./build/ && cd ./build/
-    cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
+    cmake .. -DCMAKE_BUILD_TYPE=Debug
     cmake --build . -v
     cd ..
     echo "------------END------------"
@@ -47,7 +47,7 @@ else
     if [ ! -d "./build/" ]
     then
         mkdir ./build/ && cd ./build/
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+        cmake ..
         cd ..
     else
         cmake --build ./build/
