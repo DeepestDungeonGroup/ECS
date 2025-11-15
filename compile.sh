@@ -42,6 +42,14 @@ then
     rm -rf ./build/ ./*.a
     echo "------------END------------"
 
+elif [[ $1 == "-cs" ]]
+then
+    echo "------------CS CHECKER------------"
+    rm -rf ./build/
+    pip install cpplint
+    cpplint --recursive .
+    echo "------------END------------"
+
 else
     echo "------------BUILD------------"
     if [ ! -d "./build/" ]
