@@ -3,11 +3,12 @@
 ** ECS
 ** File description:
 ** Entity.hpp
+** Copyright [2025] <DeepestDungeonGroup>
 */
 
-#ifndef ENTITY_HPP_
-    #define ENTITY_HPP_
-    
+#ifndef INCLUDE_ENTITY_HPP_
+    #define INCLUDE_ENTITY_HPP_
+
     #include <cuchar>
 
 namespace ECS {
@@ -21,6 +22,6 @@ namespace ECS {
  */
 typedef size_t Entity;
 
-} // namespace ECS
+}  // namespace ECS
 
-#endif
+#endif  // INCLUDE_ENTITY_HPP_

@@ -11,13 +11,18 @@ set(ECS_HDR_DIR "${PROJECT_SOURCE_DIR}/include/")
 option(ENABLE_TESTS "Build tests along with the library" OFF)
 option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 
-########## COVERAGE ##########
+########## TESTING ##########
 if(ENABLE_COVERAGE)
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
     endif()
 endif()
+
+if (ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(tests/unit_tests)
+endif ()
 
 ########## ECS ##########
 add_library( ${PROJECT_NAME} STATIC
@@ -28,9 +33,3 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${ECS_HDR_DIR}
 )
-
-########## TESTING ##########
-if (ENABLE_TESTS)
-  enable_testing()
-  add_subdirectory(tests/unit_tests)
-endif ()

@@ -3,6 +3,7 @@
 ** ECS
 ** File description:
 ** sparse_array.cpp
+** Copyright [2025] <DeepestDungeonGroup>
 */
 
 #include <gtest/gtest.h>
